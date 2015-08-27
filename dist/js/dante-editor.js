@@ -1,3 +1,8 @@
+if (typeof exports === 'object' && typeof require === "function") {
+  $ = require("jquery");
+  _ = require("underscore");
+  Sanitize = require("sanitize");
+}
 (function() {
   var Dante = {
     Editor: {

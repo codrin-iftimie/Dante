@@ -18,7 +18,7 @@
   "dependencies": {
     "jquery": "*",
     "underscore" : "*",
-    "sanitize" : "*"
+    "sanitize" : "codrin-iftimie/Sanitize.js"
   },
   "author": "",
   "license": "MIT",
