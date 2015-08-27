@@ -2,7 +2,7 @@
   "name": "dante",
   "version": "0.0.14",
   "description": "Just another Medium wysiwyg editor clone http://michelson.github.io/Dante/",
-  "main": "dist/js/dante-editor.js",
+  "main": "dist/js/npm.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
