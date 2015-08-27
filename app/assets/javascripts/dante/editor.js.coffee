@@ -153,10 +153,10 @@ class Dante.Editor extends Dante.View
     "<p class='graf--p' name='#{utils.generateUniqueName()}'><br></p>"
 
   appendMenus: ()=>
-    $("<div id='dante-menu' class='dante-menu'></div>").insertAfter(@el)
-    $("<div class='inlineTooltip'></div>").insertAfter(@el)
-    @editor_menu = new Dante.Editor.Menu(editor: @)
-    @tooltip_view = new @tooltip_class(editor: @ , widgets: @widgets)
+    menu = $("<div id='dante-menu' class='dante-menu'></div>").insertAfter(@el)
+    inlineTooltip = $("<div class='inlineTooltip'></div>").insertAfter(@el)
+    @editor_menu = new Dante.Editor.Menu(el: menu, editor: @)
+    @tooltip_view = new @tooltip_class(el: inlineTooltip, editor: @ , widgets: @widgets)
     @pop_over = new Dante.Editor.PopOver(editor: @)
     @pop_over.render().hide()
     @tooltip_view.render().hide()
