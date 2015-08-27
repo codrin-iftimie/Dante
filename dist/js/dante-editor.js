@@ -1,5 +1,5 @@
 (function() {
-  window.Dante = {
+  var Dante = {
     Editor: {
       ToolTip: {},
       PopOver: {},
@@ -11,6 +11,11 @@
     version: "0.0.14"
   };
 
+  if (typeof exports === 'object') {
+    module.exports = Dante;
+  }
+
+  window.Dante = Dante;
 }).call(this);
 (function() {
   var LINE_HEIGHT, is_caret_at_end_of_node, is_caret_at_start_of_node, utils;
