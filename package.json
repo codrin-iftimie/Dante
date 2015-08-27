@@ -15,6 +15,11 @@
     "wyiwyg",
     "medium"
   ],
+  "dependencies": {
+    "jquery": "*",
+    "underscore" : "*",
+    "sanitize" : "*"
+  },
   "author": "",
   "license": "MIT",
   "bugs": {
