@@ -262,6 +262,18 @@ class Dante.Editor extends Dante.View
     sel.addRange(range)
     element.focus()
 
+  setRangeAfterBr: ()->
+    sel = window.getSelection()
+    range = sel.getRangeAt(0)
+    br = document.createElement('br')
+    range.deleteContents()
+    range.insertNode(br)
+    range.setStartAfter(br);
+    range.setEndAfter(br);
+    range.collapse(false);
+    sel.removeAllRanges()
+    sel.addRange(range)
+
   #set focus and caret position on element
   setRangeAtText: (element, pos=0)->
     range = document.createRange()
@@ -729,7 +741,15 @@ class Dante.Editor extends Dante.View
         if @isLastChar()
           utils.log "new paragraph if it's the last character"
           e.preventDefault()
-          @handleLineBreakWith("p", parent)
+          if e.shiftKey
+            if $(".hack-br", parent).length is 0
+              parent.append("<br class='hack-br'>")
+            @setRangeAfterBr()
+            parent.focus()
+            return false
+          else 
+            @handleLineBreakWith("p", parent)
+
 
       setTimeout ()=>
         node = @getNode()
@@ -905,10 +925,12 @@ class Dante.Editor extends Dante.View
   #TODO: Separate in little functions
   handleLineBreakWith: (element_type, from_element)->
     new_paragraph = $("<#{element_type} class='graf graf--#{element_type} graf--empty is-selected'><br/></#{element_type}>")
+   
     if from_element.parent().is('[class^="graf--"]')
       new_paragraph.insertAfter(from_element.parent())
     else
       new_paragraph.insertAfter(from_element)
+
     #set caret on new <p>
     @setRangeAt(new_paragraph[0])
     @scrollTo new_paragraph
