@@ -1,6 +1,3 @@
-$ = require("jquery")
-_ = require("underscore")
-
 utils = Dante.utils
 
 class Dante.View.TooltipWidget.Uploader extends Dante.View.TooltipWidget

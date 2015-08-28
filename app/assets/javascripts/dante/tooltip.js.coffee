@@ -1,6 +1,3 @@
-$ = require("jquery")
-_ = require("underscore")
-
 utils = Dante.utils
 
 class Dante.Editor.Tooltip extends Dante.View
