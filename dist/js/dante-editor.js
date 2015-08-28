@@ -19,9 +19,9 @@
 
 }).call(this);
 (function() {
-  var $, LINE_HEIGHT, is_caret_at_end_of_node, is_caret_at_start_of_node, utils, _;
+  var $, LINE_HEIGHT, is_caret_at_end_of_node, is_caret_at_start_of_node, jQuery, utils, _;
 
-  $ = require("jquery");
+  jQuery = $ = require("jquery");
 
   _ = require("underscore");
 
@@ -438,12 +438,12 @@
 
 }).call(this);
 (function() {
-  var $, Sanitize, jQuery, utils, _,
+  var $, Sanitize, utils, _,
     __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-  jQuery = $ = require("jquery");
+  $ = require("jquery");
 
   _ = require("underscore");
 
