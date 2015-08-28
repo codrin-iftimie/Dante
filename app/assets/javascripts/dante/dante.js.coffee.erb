@@ -1,4 +1,4 @@
-window.Dante = {
+Dante = {
   Editor: {
     ToolTip: {}
     PopOver: {}
@@ -8,3 +8,5 @@ window.Dante = {
     image_placeholder: '<%= image_path("dante/media-loading-placeholder.png") %>'
   version: "<%= DanteEditor::VERSION %>"
 }
+window.Dante = Dante;
+module.exports = Dante;
