@@ -86,29 +86,12 @@ class Dante.Editor.ImageMenu extends Dante.View
     @selectedImage.removeClass(classes_to_remove.join(" ")).addClass("image-" + action);
     return false
 
-  setupInsertedElement: (element)->
-    n = @current_editor.addClassesToElement(element)
-    @current_editor.setElementName(n)
-    @current_editor.markAsSelected(n)
-
-  displayHighlights: ()->
-    #remove all active links
-    $(@el).find(".active").removeClass("active")
-
-    nodes = @effectNode(utils.getNode())
-    utils.log(nodes)
-    _.each nodes, (node)=>
-      tag = node.nodeName.toLowerCase()
-
-      @highlight(tag)
-
   highlight: (tag)->
     $(".icon-#{tag}").parent("li").addClass("active")
 
   show: (elem)->
     @selectedImage = elem
     $(@el).addClass("dante-menu--active")
-    @displayHighlights()
 
   hide: ()->
     @selectedImage = null
