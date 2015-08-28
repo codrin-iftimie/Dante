@@ -1,6 +1,3 @@
-$ = require("jquery")
-_ = require("underscore")
-
 #a very light backbone.view like version
 
 class Dante.View

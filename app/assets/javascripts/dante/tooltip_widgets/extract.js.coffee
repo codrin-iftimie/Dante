@@ -1,5 +1,3 @@
-$ = require("jquery")
-_ = require("underscore")
 utils = Dante.utils
 
 class Dante.View.TooltipWidget.EmbedExtract extends Dante.View.TooltipWidget

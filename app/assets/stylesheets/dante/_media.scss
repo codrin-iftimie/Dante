@@ -37,3 +37,15 @@
   margin: auto;
   max-width: 100%;
 }
+
+.image-align-left {
+  clear: none;
+  float: left;
+  margin-right: 21px;
+}
+
+.image-align-right {
+  clear: none;
+  float: right;
+  margin-left: 21px;
+}

@@ -1,7 +1,3 @@
-$ = require("jquery")
-_ = require("underscore")
-Sanitize = require("sanitize")
-
 utils = Dante.utils
 
 class Dante.Editor extends Dante.View
@@ -157,11 +153,15 @@ class Dante.Editor extends Dante.View
 
   appendMenus: ()=>
     menu = $("<div id='dante-menu' class='dante-menu'></div>").insertAfter(@el)
+    imageMenu = $("<div id='dante-image-menu' class='dante-menu'></div>").insertAfter(@el)
     inlineTooltip = $("<div class='inlineTooltip'></div>").insertAfter(@el)
     @editor_menu = new Dante.Editor.Menu(el: menu, editor: @)
+    @image_menu = new Dante.Editor.ImageMenu(el: imageMenu, editor: @)
     @tooltip_view = new @tooltip_class(el: inlineTooltip, editor: @ , widgets: @widgets)
     @pop_over = new Dante.Editor.PopOver(editor: @)
     @pop_over.render().hide()
+    @image_menu.render()
+    @image_menu.hide()
     @tooltip_view.render().hide()
 
   appendInitialContent: ()=>
@@ -262,6 +262,18 @@ class Dante.Editor extends Dante.View
     sel.addRange(range)
     element.focus()
 
+  setRangeAfterBr: ()->
+    sel = window.getSelection()
+    range = sel.getRangeAt(0)
+    br = document.createElement('br')
+    range.deleteContents()
+    range.insertNode(br)
+    range.setStartAfter(br);
+    range.setEndAfter(br);
+    range.collapse(false);
+    sel.removeAllRanges()
+    sel.addRange(range)
+
   #set focus and caret position on element
   setRangeAtText: (element, pos=0)->
     range = document.createRange()
@@ -305,10 +317,10 @@ class Dante.Editor extends Dante.View
     (if root && root.contains(node) then node else null)
 
   displayMenu: (sel)->
-    setTimeout ()=>
-      @editor_menu.render()
+    setTimeout () =>
       pos = utils.getSelectionDimensions()
-      @relocateMenu(pos)
+      @editor_menu.render()
+      @relocateMenu(@editor_menu.$el ,pos)
       @editor_menu.show()
     , 10
 
@@ -323,18 +335,22 @@ class Dante.Editor extends Dante.View
 
   #get text of selected and displays menu
   handleTextSelection: (anchor_node)->
-    @editor_menu.hide()
+    @.hideMenues()
     text = @getSelectedText()
     if !$(anchor_node).is(".graf--mixtapeEmbed, .graf--figure") && !_.isEmpty text.trim()
-        @current_node  = anchor_node
-        @.displayMenu()
+      @current_node  = anchor_node
+      @.displayMenu()
 
-  relocateMenu: (position)->
-    height = @editor_menu.$el.outerHeight()
-    padd   = @editor_menu.$el.width() / 2
+  hideMenues: () ->
+    @editor_menu.hide()
+    @image_menu.hide()
+
+  relocateMenu: (el, position)->
+    height = el.outerHeight()
+    padd   = el.width() / 2
     top    = position.top + $(window).scrollTop() - height
     left   = position.left + (position.width / 2) - padd
-    @editor_menu.$el.offset({ left: left , top: top })
+    el.offset({ left: left , top: top })
 
   hidePlaceholder: (element)->
     $(element).find("span.defaultValue").remove().html("<br>")
@@ -355,6 +371,9 @@ class Dante.Editor extends Dante.View
     @markAsSelected( element )
     $(element).parent(".graf--figure").addClass("is-selected is-mediaFocused")
     @selection().removeAllRanges()
+    @relocateMenu(@image_menu.$el, element.getBoundingClientRect());
+    @image_menu.show($(element).parent(".graf--figure"));
+    @editor_menu.hide();
 
   handleGrafFigureSelectIframe: (ev)->
     utils.log "FIGURE IFRAME SELECT"
@@ -722,7 +741,15 @@ class Dante.Editor extends Dante.View
         if @isLastChar()
           utils.log "new paragraph if it's the last character"
           e.preventDefault()
-          @handleLineBreakWith("p", parent)
+          if e.shiftKey
+            if $(".hack-br", parent).length is 0
+              parent.append("<br class='hack-br'>")
+            @setRangeAfterBr()
+            parent.focus()
+            return false
+          else 
+            @handleLineBreakWith("p", parent)
+
 
       setTimeout ()=>
         node = @getNode()
@@ -838,7 +865,7 @@ class Dante.Editor extends Dante.View
 
     utils.log "KEYUP"
 
-    @editor_menu.hide() #hides menu just in case
+    @.hideMenues() #hides menu just in case
     @reachedTop = false
     anchor_node = @getNode() #current node on which cursor is positioned
     utils_anchor_node = utils.getNode()
@@ -898,10 +925,12 @@ class Dante.Editor extends Dante.View
   #TODO: Separate in little functions
   handleLineBreakWith: (element_type, from_element)->
     new_paragraph = $("<#{element_type} class='graf graf--#{element_type} graf--empty is-selected'><br/></#{element_type}>")
+   
     if from_element.parent().is('[class^="graf--"]')
       new_paragraph.insertAfter(from_element.parent())
     else
       new_paragraph.insertAfter(from_element)
+
     #set caret on new <p>
     @setRangeAt(new_paragraph[0])
     @scrollTo new_paragraph

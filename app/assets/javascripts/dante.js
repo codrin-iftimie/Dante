@@ -10,3 +10,4 @@
 //= require dante/tooltip
 //= require dante/popover
 //= require dante/menu
+//= require dante/image_menu
