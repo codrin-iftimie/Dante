@@ -66,10 +66,9 @@ class Dante.Editor.ImageMenu extends Dante.View
       el = el.parentNode
     nodes
 
-  menuApply: (action, value)->
-    classes_to_remove = @config.buttons.map((btn) => return "graf-image--" + action)
+  menuApply: (action, value)=>
+    classes_to_remove = @config.buttons.map (btn) => return "image-" + btn
     img = @selectedImage.find("img");
-    console.log(action)
     if ["align-left", "align-right"].indexOf(action) > -1
       width = img.data("width")
       height = img.data("height")
@@ -84,7 +83,7 @@ class Dante.Editor.ImageMenu extends Dante.View
     else
       @selectedImage.css({width: "auto", height: "auto"});
 
-    @selectedImage.removeClass(classes_to_remove).addClass("graf-image--" + action)
+    @selectedImage.removeClass(classes_to_remove.join(" ")).addClass("image-" + action);
     return false
 
   setupInsertedElement: (element)->
