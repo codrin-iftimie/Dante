@@ -1467,7 +1467,7 @@
         new_paragraph.insertAfter(from_element);
       }
       this.setRangeAt(new_paragraph[0]);
-      return this.scrollTo(new_paragraph);
+      return this.scrollTo(new_paragraph[0]);
     };
 
     Editor.prototype.replaceWith = function(element_type, from_element) {

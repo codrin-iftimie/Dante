@@ -904,7 +904,7 @@ class Dante.Editor extends Dante.View
       new_paragraph.insertAfter(from_element)
     #set caret on new <p>
     @setRangeAt(new_paragraph[0])
-    @scrollTo new_paragraph
+    @scrollTo new_paragraph[0]
 
   replaceWith: (element_type, from_element)->
     new_paragraph = $("<#{element_type} class='graf graf--#{element_type} graf--empty is-selected'><br/></#{element_type}>")
