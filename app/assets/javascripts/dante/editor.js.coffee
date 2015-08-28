@@ -1,3 +1,6 @@
+$ = require("jquery")
+_ = require("underscore")
+Sanitize = require("sanitize")
 
 utils = Dante.utils
 
@@ -805,7 +808,7 @@ class Dante.Editor extends Dante.View
       utils.log("SPACEBAR")
       if (parent.hasClass("graf--p"))
         @handleSmartList(parent, e)
-    
+
     #arrows key
     #up & down
     if _.contains([UPARROW, DOWNARROW], e.which)

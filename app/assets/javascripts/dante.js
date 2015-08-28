@@ -1,8 +1,3 @@
-if (typeof exports === 'object' && typeof require === "function") {
-  $ = require("jquery");
-  _ = require("underscore");
-  Sanitize = require("sanitize");
-}
 //Editor components
 //= require dante/dante
 //= require dante/utils

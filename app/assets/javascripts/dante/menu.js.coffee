@@ -1,3 +1,6 @@
+$ = require("jquery")
+_ = require("underscore")
+
 utils = Dante.utils
 
 class Dante.Editor.Menu extends Dante.View

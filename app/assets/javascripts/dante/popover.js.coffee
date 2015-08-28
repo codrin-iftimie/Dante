@@ -1,3 +1,6 @@
+$ = require("jquery")
+_ = require("underscore")
+
 utils = Dante.utils
 
 class Dante.Editor.PopOver extends Dante.View

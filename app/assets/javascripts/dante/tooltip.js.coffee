@@ -1,3 +1,6 @@
+$ = require("jquery")
+_ = require("underscore")
+
 utils = Dante.utils
 
 class Dante.Editor.Tooltip extends Dante.View
@@ -30,7 +33,7 @@ class Dante.Editor.Tooltip extends Dante.View
 
     _.find @widgets, (e)->
       e.action == name
-    
+
 
   render: ()=>
     $(@el).html(@template())
