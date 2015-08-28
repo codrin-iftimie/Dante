@@ -1,7 +1,6 @@
 utils = Dante.utils
 
 class Dante.Editor.Tooltip extends Dante.View
-  el: ".inlineTooltip"
 
   events:
     "click .inlineTooltip-button.control" : "toggleOptions"

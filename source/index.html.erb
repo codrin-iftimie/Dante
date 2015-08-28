@@ -2,14 +2,27 @@
 title: Dante Editor example
 ---
 
-<div id="editor">
-  <%= partial "partials/readme" %>
+<div id="editor" style="z-index: 2; position: relative;">
 </div>
 
 <script type="text/javascript">
   editor = new Dante.Editor(
     {
       el: "#editor",
+      upload_url: "/uploads/new.json",
+      debug: <%= build? ? false : true %>
+    }
+  )
+  editor.start()
+</script>
+
+<div id="editor2" style="z-index: 2; position: relative;">
+</div>
+
+<script type="text/javascript">
+  editor = new Dante.Editor(
+    {
+      el: "#editor2",
       upload_url: "/uploads/new.json",
       debug: <%= build? ? false : true %>
     }

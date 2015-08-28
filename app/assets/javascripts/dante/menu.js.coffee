@@ -1,7 +1,6 @@
 utils = Dante.utils
 
 class Dante.Editor.Menu extends Dante.View
-  el: "#dante-menu"
 
   events:
     "mousedown li" : "handleClick"
