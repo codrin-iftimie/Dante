@@ -30,6 +30,7 @@ class DistBuilder < Middleman::Extension
       js_dir = File.join(app.config[:build_dir], app.config[:js_dir])
       FileUtils.mkdir_p dist_js_path
       FileUtils.cp "#{js_dir}/dante-editor.js", dist_js_path, :verbose => true
+      FileUtils.cp "#{js_dir}/npm.js", dist_js_path, :verbose => true
 
 
       css_dir = File.join(app.config[:build_dir], app.config[:css_dir])
