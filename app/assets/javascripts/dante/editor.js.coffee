@@ -1,4 +1,4 @@
-$ = require("jquery")
+jQuery = $ = require("jquery")
 _ = require("underscore")
 Sanitize = require("sanitize")
 
