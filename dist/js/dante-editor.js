@@ -1,5 +1,5 @@
 (function() {
-  var Dante, exports;
+  var Dante;
 
   Dante = {
     Editor: {
@@ -15,7 +15,9 @@
 
   window.Dante = Dante;
 
-  exports = Dante;
+  if (typeof exports === "object") {
+    module.exports = Dante;
+  }
 
 }).call(this);
 (function() {
