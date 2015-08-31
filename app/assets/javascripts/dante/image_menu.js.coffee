@@ -12,8 +12,8 @@ class Dante.Editor.ImageMenu extends Dante.View
     "mousedown li" : "handleClick"
 
   initialize: (opts={})=>
-    @config = opts.buttons || @default_config()
     @current_editor = opts.editor
+    @config = _.extend @default_config(),  @current_editor.image_menu_options
 
     @commandsReg = {
       block: /^(?:p|h[1-6]|blockquote|pre)$/
@@ -40,7 +40,8 @@ class Dante.Editor.ImageMenu extends Dante.View
       ]
     ###
 
-    buttons: ['align-left', 'align-right', 'center', 'full-width']
+    buttons: ['align-left', 'align-right', 'center', 'full-width'],
+    max_align_width: 350
 
   template: ()=>
     html = "<ul class='dante-menu-buttons'>"
@@ -79,7 +80,7 @@ class Dante.Editor.ImageMenu extends Dante.View
       width = img.data("width")
       height = img.data("height")
       ratio = width / height
-      MAX_WIDTH = 350;
+      MAX_WIDTH = @config.max_align_width
 
       if width > MAX_WIDTH
         width = MAX_WIDTH;

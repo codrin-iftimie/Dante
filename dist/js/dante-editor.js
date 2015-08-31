@@ -204,7 +204,7 @@
 
   utils.isElementInViewport = function(el) {
     var rect;
-    if (typeof jQuery === "function" && el instanceof jQuery) {
+    if (typeof $ === "function" && el instanceof $) {
       el = el[0];
     }
     rect = el.getBoundingClientRect();
@@ -547,6 +547,7 @@
       this.store_interval = opts.store_interval || 15000;
       this.paste_element_id = "#dante-paste-div";
       this.tooltip_class = opts.tooltip_class || Dante.Editor.Tooltip;
+      this.image_menu_options = opts.image_menu_options;
       opts.base_widgets || (opts.base_widgets = ["uploader", "embed", "embed_extract"]);
       this.widgets = [];
       window.debugMode = opts.debug || false;
@@ -3038,8 +3039,8 @@
       if (opts == null) {
         opts = {};
       }
-      this.config = opts.buttons || this.default_config();
       this.current_editor = opts.editor;
+      this.config = _.extend(this.default_config(), this.current_editor.image_menu_options);
       this.commandsReg = {
         block: /^(?:p|h[1-6]|blockquote|pre)$/,
         inline: /^(?:bold|italic|underline|insertorderedlist|insertunorderedlist|indent|outdent)$/,
@@ -3065,7 +3066,8 @@
             'indent', 'outdent', 'bold', 'italic', 'underline', 'createlink'
           ]
          */
-        buttons: ['align-left', 'align-right', 'center', 'full-width']
+        buttons: ['align-left', 'align-right', 'center', 'full-width'],
+        max_align_width: 350
       };
     };
 
@@ -3120,7 +3122,7 @@
         width = img.data("width");
         height = img.data("height");
         ratio = width / height;
-        MAX_WIDTH = 350;
+        MAX_WIDTH = this.config.max_align_width;
         if (width > MAX_WIDTH) {
           width = MAX_WIDTH;
           height = MAX_WIDTH / ratio;

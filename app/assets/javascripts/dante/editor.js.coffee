@@ -57,6 +57,7 @@ class Dante.Editor extends Dante.View
     @store_interval  = opts.store_interval || 15000
     @paste_element_id = "#dante-paste-div"
     @tooltip_class   = opts.tooltip_class || Dante.Editor.Tooltip
+    @image_menu_options   = opts.image_menu_options
 
     opts.base_widgets ||= ["uploader", "embed", "embed_extract"]
 

@@ -150,7 +150,7 @@ utils.getCaretPosition = (editableDiv) ->
 #http://stackoverflow.com/questions/123999/how-to-tell-if-a-dom-element-is-visible-in-the-current-viewport
 utils.isElementInViewport = (el) ->
   #special bonus for those using jQuery
-  el = el[0]  if typeof jQuery is "function" and el instanceof jQuery
+  el = el[0]  if typeof $ is "function" and el instanceof $
   rect = el.getBoundingClientRect()
   #or $(window).height()
   rect.top >= 0 and rect.left >= 0 and rect.bottom <= (window.innerHeight or document.documentElement.clientHeight) and rect.right <= (window.innerWidth or document.documentElement.clientWidth) #or $(window).width()
