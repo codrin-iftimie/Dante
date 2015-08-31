@@ -49,3 +49,14 @@
   float: right;
   margin-left: 21px;
 }
+
+.image-full-width {
+  clear: both;
+  width: 100%;
+
+  .aspectRatioPlaceholder{
+    max-width: 100%!important;
+    max-height: none!important;
+  }
+}
+

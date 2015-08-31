@@ -1,3 +1,10 @@
+$ = jQuery = window.$
+_ = window._
+
+if typeof require is "function"
+  _ = require "underscore"
+  $ = require "jquery"
+
 String.prototype.killWhiteSpace = ()->
   this.replace(/\s/g, '')
 

@@ -1,4 +1,12 @@
 utils = Dante.utils
+$ = jQuery = window.$
+_ = window._
+Sanitize = window.Sanitize
+
+if typeof exports is "object"
+  _ = require "underscore"
+  $ = require "jquery"
+  Sanitize = require "sanitize"
 
 class Dante.Editor extends Dante.View
 
@@ -747,7 +755,7 @@ class Dante.Editor extends Dante.View
             @setRangeAfterBr()
             parent.focus()
             return false
-          else 
+          else
             @handleLineBreakWith("p", parent)
 
 
@@ -925,7 +933,7 @@ class Dante.Editor extends Dante.View
   #TODO: Separate in little functions
   handleLineBreakWith: (element_type, from_element)->
     new_paragraph = $("<#{element_type} class='graf graf--#{element_type} graf--empty is-selected'><br/></#{element_type}>")
-   
+
     if from_element.parent().is('[class^="graf--"]')
       new_paragraph.insertAfter(from_element.parent())
     else

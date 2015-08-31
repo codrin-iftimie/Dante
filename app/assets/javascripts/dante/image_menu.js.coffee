@@ -1,4 +1,10 @@
 utils = Dante.utils
+$ = jQuery = window.$
+_ = window._
+
+if typeof exports is "object"
+  _ = require "underscore"
+  $ = require "jquery"
 
 class Dante.Editor.ImageMenu extends Dante.View
 
@@ -34,7 +40,7 @@ class Dante.Editor.ImageMenu extends Dante.View
       ]
     ###
 
-    buttons: ['align-left', 'align-right', 'center']
+    buttons: ['align-left', 'align-right', 'center', 'full-width']
 
   template: ()=>
     html = "<ul class='dante-menu-buttons'>"
@@ -81,7 +87,10 @@ class Dante.Editor.ImageMenu extends Dante.View
 
       @selectedImage.css({width: width, height: height});
     else
-      @selectedImage.css({width: "auto", height: "auto"});
+      width = "auto"
+      if (action is "full-width")
+        width = "100%"
+      @selectedImage.css({width: width, height: "auto"});
 
     @selectedImage.removeClass(classes_to_remove.join(" ")).addClass("image-" + action);
     return false

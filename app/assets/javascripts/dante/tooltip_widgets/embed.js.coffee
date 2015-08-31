@@ -1,4 +1,10 @@
 utils = Dante.utils
+$ = jQuery = window.$
+_ = window._
+
+if typeof exports is "object"
+  _ = require "underscore"
+  $ = require "jquery"
 
 class Dante.View.TooltipWidget.Embed extends Dante.View.TooltipWidget
 

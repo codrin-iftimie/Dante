@@ -1,3 +1,10 @@
+$ = jQuery = window.$
+_ = window._
+
+if typeof exports is "object"
+  _ = require "underscore"
+  $ = require "jquery"
+
 #a very light backbone.view like version
 
 class Dante.View
